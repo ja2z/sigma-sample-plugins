@@ -16,7 +16,7 @@ client.config.configureEditorPanel([
 
 function App() {
   const config = useConfig();
-  const columns = useElementColumns(config.source);
+  //const columns = useElementColumns(config.source);
   const sigmaData = useElementData(config.source);
 
   const ref = React.useRef(null);
