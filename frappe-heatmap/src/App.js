@@ -20,7 +20,7 @@ function App() {
   const sigmaData = useElementData(config.source);
 
   const ref = React.useRef(null);
-  const chart = React.useRef(null);
+  const chart = React.useRef(false);
   const data = React.useMemo(() => {
     const dimension = config.dimension;
     const measure = config.measures;
@@ -48,10 +48,13 @@ function App() {
   }, [config.dimension, config.measures, sigmaData]);
 
   React.useEffect(() => {
+    if (!chart.current) {
     chart.current = new Chart(ref.current, {
       type: 'heatmap',
       data,
     });
+      chart.current = true;
+    }
   }, []);
 
   React.useEffect(() => {
