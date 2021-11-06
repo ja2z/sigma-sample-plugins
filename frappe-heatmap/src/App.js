@@ -20,11 +20,11 @@ function App() {
   const sigmaData = useElementData(config.source);
 
   const ref = React.useRef(null);
-  const chart = React.useRef(null);
+  const chart = React.useRef(false);
   const data = React.useMemo(() => {
     const dimension = config.dimension;
     const measure = config.measures;
-    // console.log('got data', config, sigmaData, columns, dimension, measure);
+    console.log('got data', config, sigmaData, columns, dimension, measure);
 
     const data = {};
     let start = 0;
@@ -45,14 +45,17 @@ function App() {
       start: new Date(start),
       end: new Date(end),
     };
-  }, [columns, config.dimension, config.measures, sigmaData]);
+  }, [columns, config, sigmaData]);
 
   React.useEffect(() => {
-    chart.current = new Chart(ref.current, {
-      type: 'heatmap',
-      data,
-    });
-  }, []);
+    if (!ref.current) {
+      chart.current = new Chart(ref.current, {
+        type: 'heatmap',
+        data,
+      });
+      ref.current = true;
+    }
+  }, [data]);
 
   React.useEffect(() => {
     chart.current.update(data);
