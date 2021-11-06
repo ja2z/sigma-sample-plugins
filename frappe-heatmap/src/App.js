@@ -1,12 +1,12 @@
-import './App.css';
-import { Chart } from 'frappe-charts';
+import "./App.css";
+import { Chart } from "frappe-charts";
 import {
   client,
   useConfig,
   useElementColumns,
   useElementData,
 } from "@sigmacomputing/plugin";
-import * as React from 'react';
+import * as React from "react";
 
 client.config.configureEditorPanel([
   { name: "source", type: "element" },
@@ -24,7 +24,7 @@ function App() {
   const data = React.useMemo(() => {
     const dimension = config.dimension;
     const measure = config.measures;
-    console.log('got data', config, sigmaData, columns, dimension, measure);
+    console.log("got data", config, sigmaData, columns, dimension, measure);
 
     const data = {};
     let start = 0;
@@ -47,18 +47,24 @@ function App() {
     };
   }, [columns, config, sigmaData]);
 
+  // initial chart creation
   React.useEffect(() => {
-    if (!ref.current) {
+    // only create new chart once
+    if (!chart.current) {
       chart.current = new Chart(ref.current, {
-        type: 'heatmap',
+        type: "heatmap",
+        radius: 2,
         data,
       });
-      ref.current = true;
     }
   }, [data]);
 
+  // update the chart (e.g. when values change)
   React.useEffect(() => {
-    chart.current.update(data);
+    // only update chart if chart has been created
+    if (chart.current) {
+      chart.current.update(data);
+    }
   }, [data]);
 
   return (
