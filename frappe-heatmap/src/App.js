@@ -45,7 +45,7 @@ function App() {
       start: new Date(start),
       end: new Date(end),
     };
-  }, [columns, config.dimension, config.measures, sigmaData]);
+  }, [config.dimension, config.measures, sigmaData]);
 
   React.useEffect(() => {
     chart.current = new Chart(ref.current, {
