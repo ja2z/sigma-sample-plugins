@@ -24,7 +24,7 @@ function App() {
   const data = React.useMemo(() => {
     const dimension = config.dimension;
     const measure = config.measures;
-    // console.log('got data', config, sigmaData, columns, dimension, measure);
+    console.log('got data', config, sigmaData, columns, dimension, measure);
 
     const data = {};
     let start = 0;
@@ -50,7 +50,7 @@ function App() {
   React.useEffect(() => {
     chart.current = new Chart(ref.current, {
       type: 'heatmap',
-      data,
+      //data,
     });
   }, []);
 
