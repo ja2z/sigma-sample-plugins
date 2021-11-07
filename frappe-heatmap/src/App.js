@@ -3,7 +3,6 @@ import { Chart } from "frappe-charts";
 import {
   client,
   useConfig,
-  useElementColumns,
   useElementData,
 } from "@sigmacomputing/plugin";
 import * as React from "react";
@@ -16,7 +15,6 @@ client.config.configureEditorPanel([
 
 function App() {
   const config = useConfig();
-  //const columns = useElementColumns(config.source);
   const sigmaData = useElementData(config.source);
 
   const ref = React.useRef(null);
