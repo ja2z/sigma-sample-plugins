@@ -16,7 +16,7 @@ client.config.configureEditorPanel([
 
 function App() {
   const config = useConfig();
-  const columns = useElementColumns(config.source);
+  //const columns = useElementColumns(config.source);
   const sigmaData = useElementData(config.source);
 
   const ref = React.useRef(null);
@@ -24,7 +24,7 @@ function App() {
   const data = React.useMemo(() => {
     const dimension = config.dimension;
     const measure = config.measures;
-    console.log("got data", config, sigmaData, columns, dimension, measure);
+    //console.log("got data", config, sigmaData, columns, dimension, measure);
 
     const data = {};
     let start = 0;
@@ -37,7 +37,7 @@ function App() {
         start = start ? Math.min(start, ts) : ts;
         end = Math.max(end, ts);
       }
-      // console.log('generated data', data);
+      //console.log('generated data', data);
     }
 
     return {
@@ -45,7 +45,7 @@ function App() {
       start: new Date(start),
       end: new Date(end),
     };
-  }, [columns, config, sigmaData]);
+  }, [config, sigmaData]);
 
   // initial chart creation
   React.useEffect(() => {
